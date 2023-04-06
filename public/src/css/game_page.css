@@ -1,0 +1,118 @@
+body
+{
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background: rgba(10, 10, 10, 0.9);
+    color: aliceblue;
+}
+
+.image
+{
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    top: 0px;
+    left: 8px;
+}
+
+.image h4
+{
+
+    padding-top: 50px;
+    padding-left: 140px;
+}
+
+.image img
+{
+    width: 398px;
+    padding-top: 50px;
+    padding-left: 0;
+}
+
+label
+{
+    position: absolute;
+    top: 450px;
+}
+
+.id
+{
+    width: 150px;
+}
+
+.id-text-box
+{
+    padding: 0;
+    margin: 0;
+    top: 0px;
+    left: 10px;
+    padding-left: 10px;
+    width: 150px
+}
+
+.btn
+{
+    position: absolute;
+    top: 50px;
+    left: 0px;
+    font-family: "Robot", sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    background: #1E90FF;
+    width: 160px;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    outline: none;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: box-shadow, transform;
+    transition-property: box-shadow, transform;
+}
+
+.btn:hover, .btn:focus, .btn:active
+{
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+@media (max-width: 360px)
+{
+    .image img
+    {
+        width: 200px;
+    }
+}
+
+@media (max-width: 384px)
+{
+    .image img
+    {
+        width: 370px;
+    }
+}
+
+@media (max-width: 375px)
+{
+    .image img
+    {
+        width: 360px;
+    }
+}
+
+@media (max-width: 390px)
+{
+    .image img
+    {
+        width: 375px;
+    }
+}

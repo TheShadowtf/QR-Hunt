@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "icon" href = "./assets/logo/logo.png" type = "image/x-icon">
+    <link rel="stylesheet" href="src/css/game_page.css">
+    <title>Document</title>
+</head>
+<body>
+    <section class="image">
+        <h4>QR Hunt</h4>
+        <img src="" alt="image" class="scanned-image">
+    </section>
+    <section class="id-text-box">
+        <form action="/verify" method="POST">
+            <label>
+                <input type="text" name="teamID" placeholder="ID" value="<%= locals.teamID %>" class="id">
+                <button type="submit" class="btn">Verify</button>
+            </label>
+        </form>
+    </section>
+    <script type="text/javascript">
+        let image = document.querySelector("img");
+
+        window.addEventListener("load", (event) => {
+            image["src"] = "src/img/flowers/<%= text %>.jpg";
+        });
+    </script>
+</body>
+</html>

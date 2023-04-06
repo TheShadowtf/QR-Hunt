@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "icon" href = "./assets/logo/logo.png" type = "image/x-icon">
+    <link rel="stylesheet" href="src/css/index.css">
+    <title>Verification</title>
+    <script type="text/javascript">
+    </script>
+</head>
+<body">
+    <section>
+        <div class="top">
+            <h4>QR Hunt</h4>
+            <button type="submit" class="btn" value="Test" id="send" name="Test">Start joc</button>
+        </div>
+    </section>
+    <section>
+        <div class="images" id="images"></div>
+    </section>
+    <script type="text/javascript">
+        var sendBtn = document.getElementById("send");
+        // var chxBox = document.querySelector(".checkbox");
+        var isChecked;
+        const baseURL = "https://6740-2a02-2f08-6a09-6500-4dca-4b03-91ec-ade6.eu.ngrok.io/";
+
+        const theDiv = document.getElementById('images');
+        const image = [];
+        const imageButtons = [];
+        const clickImage = [];
+        const dotImage = [];
+        const imagesNames = [
+            "6kuWrm9slS", "6rF09iWjgT", "7F6pjr4RI7", "BxXYGveN9j", "eF9XduhZA9", "EXIULFOxut", "hW5qnhwo8G", "IoEtvxIm1G", "JEu1u1WAHg", "Jvotvcsy3F",
+            "lO2cG5Gml4", "LvNRh04MH9", "mN3oMcpnhC", "n4eX1Hf6gx", "qQXegxyN4v", "rdzVeO8Woc", "SOq8EW9NIx", "tZju17GboU", "vlyJSGSWV9", "VOHTe3uv6R"
+        ];
+        let imageCount = 0;
+        let clickedImages = 0;
+        let clickedImagesNames = [];
+
+        for (let i = 0; i < imagesNames.length; i++)
+        {
+            image.push(document.createElement('img'));
+            clickImage.push(document.createElement('a'));
+        }
+
+        for (let i = 0; i < imagesNames.length; i++)
+        {
+            image[i].setAttribute('src', 'src/img/flowers/' + imagesNames[i] + '.jpg');
+            image[i].setAttribute('alt', 'nature');
+            image[i].setAttribute('class', 'image');
+            image[i].setAttribute('name', imagesNames[i]);
+
+            clickImage[i].setAttribute('onClick', "addImagesToGame('" + imagesNames[i] + "', this)");
+            clickImage[i].setAttribute('href', "javascript:;");
+
+            theDiv.appendChild(clickImage[i]);
+            clickImage[i].appendChild(image[i]);
+        }
+
+        function addImagesToGame(imageName, element) {
+            var innerImage = element.querySelector('img');
+            if(innerImage) {
+                if(innerImage.classList.contains('clicked') && clickedImages > 0) {
+                    innerImage.classList.remove('clicked');
+                    clickedImagesNames.pop(imageName);
+                    clickedImages--;
+                } else if (clickedImages < 3) {
+                    innerImage.classList.add('clicked');
+                    clickedImagesNames.push(imageName);
+                    clickedImages++;
+                }
+            } else
+            {
+                console.log("Failed to load!");
+            }
+        }
+
+        // image.forEach(images => {
+        //     images.setAttribute('src', 'src/img/flowers/' + imagesNames[imageCount] + '.jpg');
+        //     images.setAttribute('alt', 'nature');
+        //     images.setAttribute('class', 'image')
+        //     images.setAttribute('name', imagesNames[imageCount])
+
+        //     theDiv.appendChild(images);
+        //     imageCount++;
+        // });
+
+        // chxBox.addEventListener("change", function(){
+        //     isChecked = isChecked ? "" : chxBox.name;
+        //     console.log(isChecked)
+        // })
+
+        sendBtn.addEventListener('click', checkToSend);
+
+        function checkToSend(e)
+        {
+            if (clickedImages == 3)
+            {
+                sendInfo(e);
+                console.log("Done")
+            } else
+            {
+                console.log("Please select more images!")
+                alert("Select at least 3 images!")
+            }
+        }
+
+        async function sendInfo(e)
+        {
+            e.preventDefault();
+            const res = await fetch(baseURL, 
+            {
+                method: 'POST',
+                headers:
+                {
+                    "content-Type": 'application/json'
+                },
+                body: JSON.stringify(
+                    {
+                        parcel: clickedImagesNames
+                    }
+                )
+            });
+            window.location.href = "/scoreboard";
+        }
+    </script>
+</body>
+</html>

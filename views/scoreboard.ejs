@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "icon" href = "./assets/logo/logo.png" type = "image/x-icon">
+    <link rel="stylesheet" href="src/css/scoreboard.css">
+    <title>Verification</title>
+</head>
+<body style="align-items: center; padding-top: 100px;">
+    <table>
+        <h4>QR Hunt</h4>
+        <tr>
+            <th>Echipe</th>
+            <th>Imagini</th>
+            <th>Win</th>
+        </tr>
+        <tr>
+            <th>1</th>
+            <th><%= locals.team1 %></th>
+            <th><%= locals.team1Win %></th>
+        </tr>
+        <tr>
+            <th>2</th>
+            <th><%= locals.team2 %></th>
+            <th><%= locals.team2Win %></th>
+        </tr>
+        <tr>
+            <th>3</th>
+            <th><%= locals.team3 %></th>
+            <th><%= locals.team3Win %></th>
+        </tr>
+    </table>
+    <div class="top">
+        <button type="submit" class="btn" value="Test" id="restart" name="Test">Restart joc</button>
+    </div>
+    <script type="text/javascript">
+        const baseURL = "https://6740-2a02-2f08-6a09-6500-4dca-4b03-91ec-ade6.eu.ngrok.io/scoreboard";
+        var restartBtn = document.getElementById("restart");
+
+        restartBtn.addEventListener('click', sendInfo);
+
+        async function sendInfo(e)
+        {
+            e.preventDefault();
+            const res = await fetch(baseURL, 
+            {
+                method: 'POST',
+                headers:
+                {
+                    "Content-Type": 'application/json'
+                },
+                body: JSON.stringify(
+                    {
+                        parcel: true
+                    }
+                )
+            });
+            window.location.href = "/";
+        }
+    </script>
+</body>
+</html>
